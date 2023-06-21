@@ -1,0 +1,5 @@
+langchain
+chromadb
+gpt4all
+sentence_transformers
+colorama
