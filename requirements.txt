@@ -1,5 +1,8 @@
 langchain
 chromadb
 gpt4all
+openai
+tiktoken
 sentence_transformers
 colorama
+pydantic
