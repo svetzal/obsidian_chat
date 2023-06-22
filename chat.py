@@ -22,5 +22,5 @@ class Chat:
         self.qa = config.get_chain(self.llm, self.db)
 
     def ask(self, question: str):
-        qa_response = self.qa({'question': question})
+        qa_response = self.qa(question)
         return qa_response
