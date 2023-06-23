@@ -1,5 +1,4 @@
 from langchain.callbacks import StreamingStdOutCallbackHandler
-from langchain.chains import RetrievalQA
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import Chroma
 
