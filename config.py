@@ -1,5 +1,4 @@
 import os
-from typing import Tuple
 
 from langchain import OpenAI
 from langchain.chains import RetrievalQA, ConversationalRetrievalChain
@@ -102,6 +101,34 @@ class OpenAiChatConfig(Config):
             # top_p=self.top_p,
             verbose=False
         )
+
+    def get_chain(self, llm, db):
+        memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="result")
+        return ConversationalRetrievalChain.from_llm(
+            llm,
+            db.as_retriever(search_kwargs={"k": 3}),
+            memory=memory,
+            chain_type="stuff",
+            return_source_documents=True,
+            output_key="result",
+            get_chat_history=lambda h: h,
+            verbose=False,
+        )
+
+
+# This is not yet functinoal, it will not work for you.
+class Mpt7bChatConfig(Config):
+
+    def __init__(self, obsidian_root: str):
+        self.obsidian_root = obsidian_root
+        self.local_model = f"{os.environ['HOME']}/Library/Application Support/nomic.ai/GPT4All/ggml-mpt-7b-chat.bin"
+        self.max_context_size = 2048
+        self.chunk_content_size = 384
+        self.chunk_overlap = 64
+        self.generated_content_size = 512
+        self.temperature = 0
+        self.top_p = 0.85
+        self.top_k = 5
 
     def get_chain(self, llm, db):
         memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="result")

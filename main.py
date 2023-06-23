@@ -5,13 +5,13 @@ import sys
 from colorama import Fore, Style
 
 from chat import Chat
-from config import Mpt7bInstructConfig, NousHermes13bConfig, Gpt4alll13bSnoozy, OpenAiConfig, OpenAiChatConfig
+from config import Mpt7bInstructConfig
 
 
 def main(obsidian_root):
     remove_db()
 
-    config = OpenAiChatConfig(obsidian_root)
+    config = Mpt7bInstructConfig(obsidian_root)
 
     print(Fore.BLUE + "Initializing..." + Style.RESET_ALL)
 
